@@ -4,9 +4,10 @@ import argparse
 import imutils
 import cv2
 import time
-from functions import ShapeDetector
 
-#import piCamera
+# from functions import ShapeDetector
+
+# import piCamera
 
 # 1: TURN PROJECTOR OFF BY DEFAULT
 # use some Python GUI deal, that you can set to full screen
@@ -15,7 +16,7 @@ from functions import ShapeDetector
 # test image for now - we'll want it to be video stream later on
 
 original = cv2.imread('test.jpg')
-image = cv2.resize(original, (0,0), fx=0.5, fy=0.5)
+image = cv2.resize(original, (0, 0), fx=0.5, fy=0.5)
 
 # 3: EXTRACT CONTOURS
 # load the image, convert it to grayscale, blur it slightly and threshold it
@@ -26,18 +27,48 @@ thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
 
 # find contours in the thresholded images
 contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
+
+#ratio = image.shape
+font = cv2.FONT_HERSHEY_SIMPLEX
+
+for c in contours:
+    area = cv2.contourArea(c)
+    approx = cv2.approxPolyDP(c, 0.04*cv2.arcLength(c, True), True)
+    x = approx.ravel()[0]
+    y = approx.ravel()[1]
+
+    if area > 2000:
+        cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
+
+        if len(approx) == 4:
+            cv2.putText(image, "Rectangle", (x,y), font, 1, (240, 0, 159))
+
+
+
+
+cv2.imshow("win", image)
+
+
+
+#     if len(approx) == 4:
+#         shape = "square"
+#         (x, y, w, h) = cv2.boundingRect(approx)
+#         ar = w / float(h)
+#         cv2.putText(image, shape, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)
+#     else:
+#         shape = "unidentified"
+#
+#
 
 # display image + contours
-cv2.imshow('win', image)
 
-#logic?:
+
+# logic?:
 # find square contour, find center of square contour.
 
 
 # CHECK IF SQUARE
 # if the contours has 4 sides and 4 intersections, it is a square.
-
 
 
 # IF SQUARE, FIND CENTER POINT

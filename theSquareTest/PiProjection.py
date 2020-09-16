@@ -17,6 +17,8 @@ camera.framerate = 32
 rawCapture = PiRGBArray(camera, size= (840, 480))
 time.sleep(0.5) #allow picamera to warm up
 
+font = cv2.FONT_HERSHEY_SIMPLEX
+
 # capture continuous image stream
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -34,6 +36,18 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # find contours in the thresholded images
     contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
     cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
+
+    for c in contours:
+        area = cv2.contourArea(c)
+        approx = cv2.approxPolyDP(c, 0.04 * cv2.arcLength(c, True), True)
+        x = approx.ravel()[0]
+        y = approx.ravel()[1]
+
+        if area > 2000:
+            cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
+
+            if len(approx) == 4:
+                cv2.putText(image, "Rectangle", (x, y), font, 1, (240, 0, 159))
 
     # display image + contours
     cv2.imshow('win', image)
