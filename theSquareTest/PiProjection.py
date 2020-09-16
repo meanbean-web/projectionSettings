@@ -7,8 +7,6 @@ from picamera.array import PiRGBArray
 # 1: TURN PROJECTOR OFF BY DEFAULT
 
 # 2: LOAD LIVE IMAGE DATA
-# test image for now - we'll want it to be video stream later on
-
 # declare picamera
 camera = PiCamera ()
 camera.resolution = (840, 480)
@@ -23,9 +21,10 @@ font = cv2.FONT_HERSHEY_SIMPLEX
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     original = frame.array #store each incoming image as a numpy array
-    image = cv2.resize(original, (0, 0), fx=0.5, fy=0.5)
+    image = cv2.resize(original, (0, 0), fx= 1, fy=1)
 
     image = cv2.flip(image, 1)
+
     # 3: EXTRACT CONTOURS
     # load the image, convert it to grayscale, blur it slightly and threshold it
 
@@ -35,11 +34,10 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     # find contours in the thresholded images
     contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-    cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
 
     for c in contours:
         area = cv2.contourArea(c)
-        approx = cv2.approxPolyDP(c, 0.04 * cv2.arcLength(c, True), True)
+        approx = cv2.approxPolyDP(c, 0.01 * cv2.arcLength(c, True), True)
         x = approx.ravel()[0]
         y = approx.ravel()[1]
 
