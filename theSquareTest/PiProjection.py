@@ -47,14 +47,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
             if len(approx) == 4:
                 text = cv2.putText(image, "Rectangle", (x, y), font, 1, (240, 0, 159))
-                cv2.drawContours(image, approx, -1, (240, 0, 159), 3)
+                #cv2.drawContours(image, approx, -1, (240, 0, 159), 3)
                 x_, y_, w, h = cv2.boundingRect(approx)
                 cv2.rectangle(image, (x_, y_), (x_ + w, y_ + h), (240, 0, 159), 5)
 
-
-
-    # display image + contours
-    cv2.imshow('win', image)
+    cv2.imshow("win", image)
 
     key = cv2.waitKey(1) & 0xFF
 
