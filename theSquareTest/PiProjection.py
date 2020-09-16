@@ -47,9 +47,18 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
             if len(approx) == 4:
                 text = cv2.putText(image, "Rectangle", (x, y), font, 1, (240, 0, 159))
-                #cv2.drawContours(image, approx, -1, (240, 0, 159), 3)
+                cv2.drawContours(image, approx, -1, (240, 0, 159), 3)
                 x_, y_, w, h = cv2.boundingRect(approx)
-                cv2.rectangle(image, (x_, y_), (x_ + w, y_ + h), (240, 0, 159), 5)
+                shape = cv2.rectangle(image, (x_, y_), (x_ + w, y_ + h), (240, 0, 159), 5)
+
+                for i in shape:
+                    M = cv2.moments(c)
+                    cX = int(M["m10"] / M["m00"])
+                    cY = int(M["m01"] / M["m00"])
+
+                    cv2.circle(image, (cX, cY), 7, (255, 255, 255), -1)
+                    cv2.putText(image, "center", (cX - 20, cY - 20),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255, 255, 255), 2)
 
     cv2.imshow("win", image)
 
