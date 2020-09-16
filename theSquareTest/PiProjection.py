@@ -1,0 +1,84 @@
+import imutils
+import cv2
+import time
+import PiCamera
+
+# 1: TURN PROJECTOR OFF BY DEFAULT
+
+# 2: LOAD LIVE IMAGE DATA
+# test image for now - we'll want it to be video stream later on
+
+# declare picamera
+camera = PiCamera ()
+camera.resolution = (840, 480)
+camera.vflip = true
+time.sleep(0.5) #allow picamera to warm up
+
+# capture continuous image stream
+
+for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
+    original = frame.array #store each incoming image as a numpy array
+    image = cv2.resize(original, (0, 0), fx=0.5, fy=0.5)
+
+    while (True):
+
+        # Read frame by frame
+        ret, frame = image.read()
+
+        if not ret:
+            break
+
+    # 3: EXTRACT CONTOURS
+    # load the image, convert it to grayscale, blur it slightly and threshold it
+
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    blurred = cv2.GaussianBlur(gray, (5, 5), 0)
+    thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
+
+    # find contours in the thresholded images
+    contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
+
+    # display image + contours
+    cv2.imshow('win', image)
+
+    key = cv2.waitKey(1) & 0xFF
+
+    rawCapture.truncate(0)  # clear stream for next frame
+
+    if key == ord("q"):
+        break
+
+image.release()
+cv2.destroyAllWindows()
+
+
+
+
+
+
+
+
+
+
+
+# CHECK IF SQUARE
+# if the contours has 4 sides and 4 intersections, it is a square.
+
+
+
+# IF SQUARE, FIND CENTER POINT
+
+
+# AVERAGE SQUARE CONTOURS
+# return one clean contour
+
+# COMPUTE SQUARE CENTER
+
+
+# TURN PROJECTOR ON
+
+# DISPLAY PNG IMAGE AT SQUARE CENTER
+# you'll always want the size of your png image to be x% of the total area of the detected square.
+
+

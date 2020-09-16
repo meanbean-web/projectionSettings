@@ -12,24 +12,30 @@ import time
 # 2: LOAD LIVE IMAGE DATA
 # test image for now - we'll want it to be video stream later on
 
-image = cv2.imread('test1.jpg')
+original = cv2.imread('test.jpg')
+image = cv2.resize(original, (0,0), fx=0.5, fy=0.5)
 
 # 3: EXTRACT CONTOURS
 # load the image, convert it to grayscale, blur it slightly and threshold it
 
-gray = cv2.cvtColor(cv2.UMat(image), cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 blurred = cv2.GaussianBlur(gray, (5, 5), 0)
 thresh = cv2.threshold(blurred, 60, 255, cv2.THRESH_BINARY)[1]
 
 # find contours in the thresholded images
-contours = cv2.findContours(thresh, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
-cv2.drawContours(thresh, contours, -1, cv2.UMat(0, 255, 0), 3)
+contours, hierarchy = cv2.findContours(thresh.copy(), cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
 
-# cv2.imshow('win', cnts)
-
+# display image + contours
+cv2.imshow('win', image)
 
 # CHECK IF SQUARE
 # if the contours has 4 sides and 4 intersections, it is a square.
+
+
+
+# IF SQUARE, FIND CENTER POINT
+
 
 # AVERAGE SQUARE CONTOURS
 # return one clean contour
