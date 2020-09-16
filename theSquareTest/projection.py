@@ -4,10 +4,12 @@ import argparse
 import imutils
 import cv2
 import time
+from functions import ShapeDetector
 
 #import piCamera
 
 # 1: TURN PROJECTOR OFF BY DEFAULT
+# use some Python GUI deal, that you can set to full screen
 
 # 2: LOAD LIVE IMAGE DATA
 # test image for now - we'll want it to be video stream later on
@@ -28,6 +30,10 @@ cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
 
 # display image + contours
 cv2.imshow('win', image)
+
+#logic?:
+# find square contour, find center of square contour.
+
 
 # CHECK IF SQUARE
 # if the contours has 4 sides and 4 intersections, it is a square.
