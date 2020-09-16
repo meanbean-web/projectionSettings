@@ -44,7 +44,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         y = approx.ravel()[1]
 
         if area > 2000:
-            cv2.drawContours(image, contours, -1, (240, 0, 159), 3)
+            cv2.drawContours(image, approx, -1, (240, 0, 159), 3)
 
             if len(approx) == 4:
                 cv2.putText(image, "Rectangle", (x, y), font, 1, (240, 0, 159))
