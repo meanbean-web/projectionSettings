@@ -1,8 +1,9 @@
 import imutils
 import cv2
 import time
-import PiCamera
-
+from  picamera import PiCamera
+from picamera.array import PiRGBArray
+ 
 # 1: TURN PROJECTOR OFF BY DEFAULT
 
 # 2: LOAD LIVE IMAGE DATA
@@ -11,7 +12,9 @@ import PiCamera
 # declare picamera
 camera = PiCamera ()
 camera.resolution = (840, 480)
-camera.vflip = true
+camera.vflip = True
+camera.framerate = 32
+rawCapture = PiRGBArray(camera, size= (840, 480))
 time.sleep(0.5) #allow picamera to warm up
 
 # capture continuous image stream
@@ -20,14 +23,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     original = frame.array #store each incoming image as a numpy array
     image = cv2.resize(original, (0, 0), fx=0.5, fy=0.5)
 
-    while (True):
-
-        # Read frame by frame
-        ret, frame = image.read()
-
-        if not ret:
-            break
-
+    image = cv2.flip(image, 1)
     # 3: EXTRACT CONTOURS
     # load the image, convert it to grayscale, blur it slightly and threshold it
 
