@@ -2,7 +2,7 @@
 from picamera import PiCamera
 import time
 
-camera = picamera.PiCamera()
+camera = PiCamera()
 camera.vflip = True
 #camera.start_preview()
 camera.framerate = 32
