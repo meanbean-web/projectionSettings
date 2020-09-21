@@ -7,6 +7,7 @@ import cv2
 from cv2 import aruco
 import pickle
 import glob
+import time
 
 
 
@@ -19,9 +20,12 @@ ARUCO_DICT = aruco.Dictionary_get(aruco.DICT_5X5_1000)
 CHARUCO_BOARD = aruco.CharucoBoard_create(
         squaresX=CHARUCOBOARD_COLCOUNT,
         squaresY=CHARUCOBOARD_ROWCOUNT,
-        squareLength=0.029,
-        markerLength=0.022,
+        squareLength=0.04,
+        markerLength=0.02,
         dictionary=ARUCO_DICT)
+#cv2.imshow("win", CHARUCO_BOARD)
+# cv2.waitKey(0)
+# time.sleep(10)
 
 # Create the arrays and variables we'll use to store info like corners and IDs from images processed
 corners_all = [] # Corners discovered in all images processed
@@ -35,6 +39,8 @@ image_size = None # Determined at runtime
 # All images used should be the same size, which if taken with the same camera shouldn't be a problem
 
 images = glob.glob('cal-img/frame*.jpg')
+
+print(images)
 
 # Loop through images glob'ed
 for iname in images:
@@ -52,6 +58,10 @@ for iname in images:
     img = aruco.drawDetectedMarkers(
             image=img, 
             corners=corners)
+    
+    cv2.imshow("test", img)
+    cv2.waitKey(0)
+    time.sleep(10)
 
     # Get charuco corners and ids from detected aruco markers
     response, charuco_corners, charuco_ids = aruco.interpolateCornersCharuco(
