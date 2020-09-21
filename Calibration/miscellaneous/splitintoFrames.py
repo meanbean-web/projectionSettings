@@ -2,13 +2,13 @@ import cv2
 import numpy as np
 import os
 
-video = cv2.VideoCapture('calibration-opt.mp4')
+video = cv2.VideoCapture('cal.mp4')
 
 print(video)
 
 try:
-    if not os.path.exists('../cal-img'):
-        os.makedirs('../cal-img')
+    if not os.path.exists('cal-img-cb1'):
+        os.makedirs('cal-img-cb1')
 except OSError:
     print('Error creating directory of data')
 
@@ -16,7 +16,7 @@ except OSError:
 currentFrame = 0
 while (True):
     ret, frame = video.read()
-    name = './cal-img/frame' + str(currentFrame) + '.jpg'
+    name = './cal-img-cb1/frame' + str(currentFrame) + '.jpg'
     print('Creating...' + name)
     cv2.imwrite(name, frame)
 

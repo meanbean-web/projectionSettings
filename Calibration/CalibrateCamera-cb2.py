@@ -9,6 +9,7 @@ import numpy
 import cv2
 import pickle
 import glob
+import time
 
 # Create arrays you'll use to store object points and image points from all images processed
 objpoints = [] # 3D point in real world space where chess squares are
@@ -32,7 +33,7 @@ objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLC
 # Need a set of images or a video taken with the camera you want to calibrate
 # I'm using a set of images taken with the camera with the naming convention:
 # 'camera-pic-of-chessboard-<NUMBER>.jpg'
-images = glob.glob('cal-img-cb/frame*.jpg')
+images = glob.glob('miscellaneous/cal-img-cb1/frame*.jpg')
 # All images used should be the same size, which if taken with the same camera shouldn't be a problem
 imageSize = None # Determined at runtime
 
@@ -69,7 +70,8 @@ for iname in images:
         img = cv2.drawChessboardCorners(img, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc, board)
         # Pause to display each image, waiting for key press
         cv2.imshow('Chessboard', img)
-        cv2.waitKey(0)
+        cv2.waitKey(1)
+        #time.sleep(1)
     else:
         print("Not able to detect a chessboard in image: {}".format(iname))
 
