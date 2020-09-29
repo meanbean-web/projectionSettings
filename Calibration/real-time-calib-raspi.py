@@ -7,6 +7,8 @@ import yaml
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 
+image_counter = 0
+start_time = time.time()
 
 # DECLARE PICAMERA
 camera = PiCamera ()
