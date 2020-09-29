@@ -7,6 +7,9 @@ import yaml
 from picamera import PiCamera
 from picamera.array import PiRGBArray
 
+
+scale_factor = 2.0 #downscaling size, for faster detection; set to 1.0 if no detection
+size, center_x = 0, 0 #initial size & center x point of the hand = 0
 image_counter = 0
 start_time = time.time()
 
