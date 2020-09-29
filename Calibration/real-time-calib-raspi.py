@@ -31,6 +31,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     cv2.imshow("Frame", image)
     cv2.waitKey(1)
+    time.sleep(10)
 
     # while (True):
 
