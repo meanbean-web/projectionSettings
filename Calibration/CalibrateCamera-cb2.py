@@ -10,6 +10,7 @@ import cv2
 import pickle
 import glob
 import time
+import yaml
 
 # Create arrays you'll use to store object points and image points from all images processed
 objpoints = [] # 3D point in real world space where chess squares are
@@ -108,8 +109,10 @@ print(distCoeffs)
     
 # Save values to be used where matrix+dist is required, for instance for posture estimation
 # I save files in a pickle file, but you can use yaml or whatever works for you
-f = open('calibration-files/calibration.pckl', 'wb')
-pickle.dump((cameraMatrix, distCoeffs, rvecs, tvecs), f)
+
+#save it in yaml maybe, we'll see
+f = open('calibration-files/calibration.yaml', 'wb')
+yaml.dump((cameraMatrix, distCoeffs, rvecs, tvecs), f)
 f.close()
     
 # Print to console our success
