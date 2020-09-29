@@ -14,7 +14,7 @@ image_counter = 0
 start_time = time.time()
 
 # DECLARE PICAMERA
-camera = PiCamera ()
+camera = PiCamera()
 camera.resolution = (840, 480)
 camera.vflip = True
 camera.framerate = 32
@@ -31,7 +31,14 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     cv2.imshow("Frame", image)
     cv2.waitKey(1)
-    time.sleep(10)
+    #time.sleep(10)
+
+    key = cv2.waitKey(1) & 0xFF
+
+    rawCapture.truncate(0)  # clear stream for next frame
+
+    if key == ord("q"):
+        break
 
     # while (True):
 
