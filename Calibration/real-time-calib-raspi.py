@@ -29,7 +29,7 @@ imageSize = None # Determined at runtime
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array  # store each incoming image as a numpy array
 
-    # cv2.imshow("Frame", image)
+    cv2.imshow("Frame", image)
 
     # while (True):
 
