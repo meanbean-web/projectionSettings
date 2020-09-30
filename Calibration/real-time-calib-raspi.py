@@ -18,6 +18,8 @@ time.sleep(0.2)
 imageSize = None # Determined at runtime
 CHESSBOARD_CORNERS_ROWCOUNT = 8
 CHESSBOARD_CORNERS_COLCOUNT = 5
+objpoints = [] # 3D point in real world space where chess squares are
+imgpoints = [] # 2D point in image plane, determined by CV2
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     img = frame.array
