@@ -11,9 +11,6 @@ camera.framerate = 32
 rawCapture = PiRGBArray(camera, size=(848, 480))
 camera.vflip = True
 
-#img = cv2.imread('image displays/circleGrid.png')
-#print(img)
-
 time.sleep(0.2)
 
 imageSize = None # Determined at runtime
@@ -26,11 +23,14 @@ objp = numpy.zeros((CHESSBOARD_CORNERS_ROWCOUNT*CHESSBOARD_CORNERS_COLCOUNT,3), 
 objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLCOUNT].T.reshape(-1, 2)
 projImg = cv2.imread('image displays/circleGrid.png')
 
+#GET REAL TIME VIDEO STREAM FOR RASPI
+
+
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     img = frame.array
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
-    #detect chessboard in the images supplied by the pi camera
+    #DETECT CHESSBOARD / aruco marker
 
     board, corners = cv2.findChessboardCorners(gray, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), None)
     if board == True:
@@ -68,21 +68,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     if key == ord("q"):
         break
 
-    #full screen image on the projector
 
-    while True:  # making a loop
-        try:  # used try so that if user pressed other than the given key error will not be shown
-            if keyboard.is_pressed('q'):  # if key 'q' is pressed
-
-                cv2.namedWindow('Image', cv2.WND_PROP_FULLSCREEN)
-                cv2.setWindowProperty('Image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-                cv2.imshow("Image", projImg)
-                cv2.waitKey()
-
-                print('You Pressed A Key!')
-                break  # finishing the loop
-        except:
-            break
 
 
     #you need to add a break key for this
@@ -90,17 +76,19 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
 # kill program on key press
 
-break_program = False
-def on_press(key):
-    global break_program
-    print(key)
-    if key == keyboard.Key.end:
-        print('end pressed')
-        break_program = True
-        return False
+#PROJECT FULL SCREEN TEST IMAGE
 
-with keyboard.Listener(on_press=on_press) as listener:
-    while break_program == False:
-        print('program running')
-        time.sleep(5)
-    listener.join()
+while True:  # making a loop
+    try:  # used try so that if user pressed other than the given key error will not be shown
+        if keyboard.is_pressed('q'):  # if key 'q' is pressed
+
+            cv2.namedWindow('Image', cv2.WND_PROP_FULLSCREEN)
+            cv2.setWindowProperty('Image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+            cv2.imshow("Image", projImg)
+            cv2.waitKey()
+
+            print('You Pressed A Key!')
+            break  # finishing the loop
+    except:
+        break
+
