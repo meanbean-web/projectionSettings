@@ -36,6 +36,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     cv2.imshow("Frame", gray)
     key = cv2.waitKey(1) & 0xFF
+    if key == 27:
+        cv2.destroyAllWindows()
 
     rawCapture.truncate(0)
 
