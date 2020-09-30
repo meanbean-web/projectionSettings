@@ -16,6 +16,8 @@ print(img)
 time.sleep(0.2)
 
 imageSize = None # Determined at runtime
+CHESSBOARD_CORNERS_ROWCOUNT = 8
+CHESSBOARD_CORNERS_COLCOUNT = 5
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     image = frame.array
