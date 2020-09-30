@@ -10,8 +10,8 @@ camera.framerate = 32
 rawCapture = PiRGBArray(camera, size=(848, 480))
 camera.vflip = True
 
-img = cv2.imread('image displays/circleGrid.png')
-print(img)
+#img = cv2.imread('image displays/circleGrid.png')
+#print(img)
 
 time.sleep(0.2)
 
@@ -20,8 +20,8 @@ CHESSBOARD_CORNERS_ROWCOUNT = 8
 CHESSBOARD_CORNERS_COLCOUNT = 5
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-    image = frame.array
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    img = frame.array
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
     #detect chessboard in the images supplied by the pi camera
 
