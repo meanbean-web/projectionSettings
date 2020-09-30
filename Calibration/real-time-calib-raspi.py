@@ -20,6 +20,9 @@ CHESSBOARD_CORNERS_ROWCOUNT = 8
 CHESSBOARD_CORNERS_COLCOUNT = 5
 objpoints = [] # 3D point in real world space where chess squares are
 imgpoints = [] # 2D point in image plane, determined by CV2
+objp = numpy.zeros((CHESSBOARD_CORNERS_ROWCOUNT*CHESSBOARD_CORNERS_COLCOUNT,3), numpy.float32)
+# The following line fills the tuples just generated with their values (0, 0, 0), (1, 0, 0), ...
+objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLCOUNT].T.reshape(-1, 2)
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     img = frame.array
