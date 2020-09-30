@@ -37,10 +37,17 @@ img = cv2.imread('image displays/circleGrid.png')
             # if status == 1:
             #     cv2.destroyAllWindows()
 
-while True:  # making a loop
-    try:  # used try so that if user pressed other than the given key error will not be shown
-        if keyboard.is_pressed('q'):  # if key 'q' is pressed
-            print('You Pressed A Key!')
-            break  # finishing the loop
-    except:
-        break  # if user pressed a key other than the given key the loop will break
+# while True:  # making a loop
+#     try:  # used try so that if user pressed other than the given key error will not be shown
+#         if keyboard.is_pressed('q'):  # if key 'q' is pressed
+#             print('You Pressed A Key!')
+#             break  # finishing the loop
+#     except:
+#         break  # if user pressed a key other than the given key the loop will break
+
+key = input()
+if key == 'q':
+    cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.imshow("image", img)
+    cv2.waitKey()

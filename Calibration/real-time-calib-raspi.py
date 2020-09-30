@@ -5,6 +5,15 @@ import time
 import cv2
 import numpy
 
+#comments for improvement: separate the main chunks of this code into separate definitions
+
+#1: detect chessboard
+#2: load image from user on key input
+
+
+
+
+#DECLARE CAMERA MODULE
 camera = PiCamera()
 camera.resolution = (848, 480)
 camera.framerate = 32
@@ -12,6 +21,8 @@ rawCapture = PiRGBArray(camera, size=(848, 480))
 camera.vflip = True
 
 time.sleep(0.2)
+
+#DECLARE CHESSBOARD PROPERTIES
 
 imageSize = None # Determined at runtime
 CHESSBOARD_CORNERS_ROWCOUNT = 8
@@ -56,8 +67,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         img = cv2.drawChessboardCorners(img, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc,
                                         board)
 
-
-
     #preview checkerboard detection frame
 
     cv2.imshow("Frame", img)
@@ -71,24 +80,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
 
 
-    #you need to add a break key for this
+#2: LOAD IMAGE ON KEY INPUT
 
-
-# kill program on key press
-
-#PROJECT FULL SCREEN TEST IMAGE
-
-while True:  # making a loop
-    try:  # used try so that if user pressed other than the given key error will not be shown
-        if keyboard.is_pressed('q'):  # if key 'q' is pressed
-
-            cv2.namedWindow('Image', cv2.WND_PROP_FULLSCREEN)
-            cv2.setWindowProperty('Image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-            cv2.imshow("Image", projImg)
-            cv2.waitKey()
-
-            print('You Pressed A Key!')
-            break  # finishing the loop
-    except:
-        break
+key = input()
+if key == 'q':
+    cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.imshow("image", img)
+    cv2.waitKey()
 
