@@ -1,5 +1,6 @@
 from picamera.array import PiRGBArray
 from picamera import PiCamera
+from pynput import keyboard
 import time
 import cv2
 import numpy
@@ -23,6 +24,7 @@ imgpoints = [] # 2D point in image plane, determined by CV2
 objp = numpy.zeros((CHESSBOARD_CORNERS_ROWCOUNT*CHESSBOARD_CORNERS_COLCOUNT,3), numpy.float32)
 # The following line fills the tuples just generated with their values (0, 0, 0), (1, 0, 0), ...
 objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLCOUNT].T.reshape(-1, 2)
+img1 = cv2.imread('image displays/try.jpg')
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     img = frame.array
@@ -70,10 +72,25 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     cv2.imshow("Frame", img)
     key = cv2.waitKey(1) & 0xFF
-    if key == 27:
-        cv2.destroyAllWindows()
 
     rawCapture.truncate(0)
 
     if key == ord("q"):
         break
+
+# kill program on key press
+
+break_program = False
+def on_press(key):
+    global break_program
+    print(key)
+    if key == keyboard.Key.end:
+        print ('end pressed')
+        break_program = True
+        return False
+
+with keyboard.Listener(on_press=on_press) as listener:
+    while break_program == False:
+        print ('program running')
+        time.sleep(5)
+    listener.join()
