@@ -24,7 +24,7 @@ imgpoints = [] # 2D point in image plane, determined by CV2
 objp = numpy.zeros((CHESSBOARD_CORNERS_ROWCOUNT*CHESSBOARD_CORNERS_COLCOUNT,3), numpy.float32)
 # The following line fills the tuples just generated with their values (0, 0, 0), (1, 0, 0), ...
 objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLCOUNT].T.reshape(-1, 2)
-img1 = cv2.imread('image displays/try.jpg')
+projImg = cv2.imread('image displays/circleGrid.png')
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     img = frame.array
@@ -53,22 +53,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
         # Draw the corners to a new image to show whoever is performing the calibration
         # that the board was properly detected
-        img = cv2.drawChessboardCorners(img1, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc,
+        img = cv2.drawChessboardCorners(img, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc,
                                         board)
 
 
 
-    #full screen frame
-
-    cv2.namedWindow("Frame", cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty("Frame", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-
-    #you need to add a break key for this
-
-
-
-
-
+    #preview checkerboard detection frame
 
     cv2.imshow("Frame", img)
     key = cv2.waitKey(1) & 0xFF
@@ -78,6 +68,15 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     if key == ord("q"):
         break
 
+    #full screen image on the projector
+
+    cv2.namedWindow("Image", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Image", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.imshow("Image", projImg)
+
+    #you need to add a break key for this
+
+
 # kill program on key press
 
 break_program = False
@@ -85,12 +84,12 @@ def on_press(key):
     global break_program
     print(key)
     if key == keyboard.Key.end:
-        print ('end pressed')
+        print('end pressed')
         break_program = True
         return False
 
 with keyboard.Listener(on_press=on_press) as listener:
     while break_program == False:
-        print ('program running')
+        print('program running')
         time.sleep(5)
     listener.join()
