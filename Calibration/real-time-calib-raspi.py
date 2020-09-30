@@ -58,8 +58,8 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     #full screen frame
 
-    #cv2.namedWindow("Frame", cv2.WND_PROP_FULLSCREEN)
-    #cv2.setWindowProperty("Frame", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.namedWindow("Frame", cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty("Frame", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 
     #you need to add a break key for this
 
