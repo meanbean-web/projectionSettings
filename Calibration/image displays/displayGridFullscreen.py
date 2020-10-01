@@ -1,9 +1,10 @@
 import cv2
-import time
 
-img = cv2.imread('../circleGrid.png')
-cv2.namedWindow('screen', cv2.WINDOW_NORMAL)
-cv2.setWindowProperty('screen', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-cv2.imshow('screen', img)
-cv2.waitKey(1)
-time.sleep(120)
+## we'll be using this file to communicate graphics to the projector
+
+keyb = input("Hit 'q'")
+if keyb == 'q':
+    cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.imshow("image", projImg)
+    cv2.waitKey()

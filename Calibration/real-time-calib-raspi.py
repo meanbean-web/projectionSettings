@@ -31,18 +31,10 @@ imgpoints = [] # 2D point in image plane, determined by CV2
 objp = numpy.zeros((CHESSBOARD_CORNERS_ROWCOUNT*CHESSBOARD_CORNERS_COLCOUNT,3), numpy.float32)
 # The following line fills the tuples just generated with their values (0, 0, 0), (1, 0, 0), ...
 objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLCOUNT].T.reshape(-1, 2)
-projImg = cv2.imread('circleGrid.png')
+projImg = cv2.imread('image displays/circleGrid.png')
 
 # # 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
-# cv2.imshow("image", projImg)
-# keyb = input("Hit 'q'")
-# if keyb == 'q':
-#     cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
-#     cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-#     cv2.imshow("image", projImg)
-#     cv2.waitKey()
 
-subprocess.run('cd ..')
 
 
 #GET REAL TIME VIDEO STREAM FOR RASPI

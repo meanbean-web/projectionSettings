@@ -3,7 +3,7 @@ import cv2
 import time
 
 
-img = cv2.imread('circleGrid.png')
+img = cv2.imread('image displays/circleGrid.png')
 # key = cv2.waitKey(1) & 0xFF
 
 #
