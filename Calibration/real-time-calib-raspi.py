@@ -38,6 +38,7 @@ projImg = cv2.imread('image displays/circleGrid.png')
 
 counter = 0
 
+
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     counter +=1
     img = frame.array
@@ -71,7 +72,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     if counter < 40:
         print(counter)
-    
+
     # CALIBRATE CAMERA
     # if the number of retrieved images is 40, then calibrate the camera > you might want to add the first 40 frames to a folder
 
@@ -88,10 +89,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         print(distCoeffs)
 
 
-
-
-
-
     #GET CENTER AND VECTOR DIRECTION OF THE CHESSBOARD
         #if you can get the surface of the chessboard overall
         #you can get bounding edges
@@ -100,8 +97,17 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #preview checkerboard detection frame + vectorial orientation
 
     cv2.imshow("Frame", img)
-    key = cv2.waitKey(1) & 0xFF
+    cv2.waitKey()
+    #key = cv2.waitKey(1) & 0xFF
 
+    # 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
+
+    keyb = input("Hit 'q'")
+    if keyb == 'q':
+        cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
+        cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+        cv2.imshow("image", projImg)
+        cv2.waitKey()
 
     #DETECT RED CIRCLES FROM THE PROJECTOR
       #some code here
@@ -125,13 +131,5 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         break
 
 
-#2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
-
-key = input()
-if key == 'q':
-    cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-    cv2.imshow("image", projImg)
-    cv2.waitKey()
 
 
