@@ -42,7 +42,7 @@ projImg = cv2.imread('circleGrid.png')
 #     cv2.imshow("image", projImg)
 #     cv2.waitKey()
 
-subprocess.run('feh --fullscreen --hide-pointer --slideshow-delay=27 circleGrid.png')
+subprocess.run('ls')
 
 
 #GET REAL TIME VIDEO STREAM FOR RASPI
