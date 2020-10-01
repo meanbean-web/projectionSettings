@@ -95,12 +95,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #preview checkerboard detection frame + vectorial orientation
 
     cv2.imshow("Frame", img)
-    cv2.waitKey()
+    #cv2.waitKey()
     key = cv2.waitKey(1) & 0xFF
 
     rawCapture.truncate(0)
 
-    if key == ord("y"):
+    if key == ord("q"):
         break
 
 
