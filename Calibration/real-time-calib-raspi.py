@@ -4,13 +4,12 @@ from pynput import keyboard
 import time
 import cv2
 import numpy
+import subprocess
 
 #comments for improvement: separate the main chunks of this code into separate definitions
 
 #1: detect chessboard
 #2: load image from user on key input
-
-
 
 
 #DECLARE CAMERA MODULE
@@ -32,20 +31,23 @@ imgpoints = [] # 2D point in image plane, determined by CV2
 objp = numpy.zeros((CHESSBOARD_CORNERS_ROWCOUNT*CHESSBOARD_CORNERS_COLCOUNT,3), numpy.float32)
 # The following line fills the tuples just generated with their values (0, 0, 0), (1, 0, 0), ...
 objp[:,:2] = numpy.mgrid[0:CHESSBOARD_CORNERS_ROWCOUNT,0:CHESSBOARD_CORNERS_COLCOUNT].T.reshape(-1, 2)
-projImg = cv2.imread('image displays/circleGrid.png')
+projImg = cv2.imread('circleGrid.png')
+
+# # 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
+# cv2.imshow("image", projImg)
+# keyb = input("Hit 'q'")
+# if keyb == 'q':
+#     cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
+#     cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+#     cv2.imshow("image", projImg)
+#     cv2.waitKey()
+
+subprocess.run('feh --fullscreen --hide-pointer --slideshow-delay=27 circleGrid.png')
+
 
 #GET REAL TIME VIDEO STREAM FOR RASPI
 
 counter = 0
-
-# 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
-cv2.imshow("image", projImg)
-keyb = input("Hit 'q'")
-if keyb == 'q':
-    cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
-    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-    cv2.imshow("image", projImg)
-    cv2.waitKey()
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     counter +=1
