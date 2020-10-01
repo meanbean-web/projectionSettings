@@ -42,7 +42,7 @@ projImg = cv2.imread('circleGrid.png')
 #     cv2.imshow("image", projImg)
 #     cv2.waitKey()
 
-subprocess.run('ls')
+subprocess.run('cd ..')
 
 
 #GET REAL TIME VIDEO STREAM FOR RASPI
