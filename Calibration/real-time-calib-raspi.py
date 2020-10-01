@@ -103,6 +103,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     #preview checkerboard detection frame + vectorial orientation
 
+    # DETECT RED CIRCLES FROM THE PROJECTOR
+    circles_grid_size = (4, 7)
+    ret, circles = cv2.findCirclesGrid(img, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
+    img = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
+
     cv2.imshow("Frame", img)
     key = cv2.waitKey(1) & 0xFF
 
@@ -113,10 +118,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
 
 
-    #DETECT RED CIRCLES FROM THE PROJECTOR
-    circles_grid_size= (4,7)
-    ret, circles = cv2.findCirclesGrid(gray, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
-    img2 = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
+
 
 
     #COMPARE ORIGINAL INPUT IMAGE TO THE IMAGE RETRIEVED FROM THE PROJECTOR DETECTION
