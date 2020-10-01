@@ -70,7 +70,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     # CALIBRATE CAMERA
     # if the number of retrieved images is 40, then calibrate the camera > you might want to add the first 40 frames to a folder
 
-    if img == 40:
+    if board == 40:
         calibration, cameraMatrix, distCoeffs, rvecs, tvecs = cv2.calibrateCamera(
             objectPoints=objpoints,
             imagePoints=imgpoints,
