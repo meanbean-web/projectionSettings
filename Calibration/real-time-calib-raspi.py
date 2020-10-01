@@ -36,9 +36,10 @@ projImg = cv2.imread('image displays/circleGrid.png')
 
 #GET REAL TIME VIDEO STREAM FOR RASPI
 
+counter = 0
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-    counter = frame
+    counter = +1
     img = frame.array
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
