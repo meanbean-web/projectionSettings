@@ -39,7 +39,7 @@ projImg = cv2.imread('image displays/circleGrid.png')
 counter = 0
 
 # 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
-
+cv2.imshow("image", projImg)
 keyb = input("Hit 'q'")
 if keyb == 'q':
     cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
@@ -106,7 +106,12 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     cv2.imshow("Frame", img)
     cv2.waitKey()
-    #key = cv2.waitKey(1) & 0xFF
+    key = cv2.waitKey(1) & 0xFF
+
+    rawCapture.truncate(0)
+
+    if key == ord("y"):
+        break
 
 
 
@@ -126,10 +131,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 ###OVERLAP CORRECTION ###
 
 
-    rawCapture.truncate(0)
 
-    if key == ord("q"):
-        break
 
 
 
