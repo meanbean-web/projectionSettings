@@ -69,22 +69,23 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         img = cv2.drawChessboardCorners(img, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc,
                                         board)
 
-    print(counter)
-
+    if counter < 40:
+        print(counter)
+    
     # CALIBRATE CAMERA
     # if the number of retrieved images is 40, then calibrate the camera > you might want to add the first 40 frames to a folder
 
-    #if board == 40: / find  a way to add a counter
-        # calibration, cameraMatrix, distCoeffs, rvecs, tvecs = cv2.calibrateCamera(
-        #     objectPoints=objpoints,
-        #     imagePoints=imgpoints,
-        #     imageSize=imageSize,
-        #     cameraMatrix=None,
-        #     distCoeffs=None)
-        #
-        # # Print matrix and distortion coefficient to the console
-        # print(cameraMatrix)
-        # print(distCoeffs)
+    if counter == 40:
+        calibration, cameraMatrix, distCoeffs, rvecs, tvecs = cv2.calibrateCamera(
+            objectPoints=objpoints,
+            imagePoints=imgpoints,
+            imageSize=imageSize,
+            cameraMatrix=None,
+            distCoeffs=None)
+
+        # Print matrix and distortion coefficient to the console
+        print(cameraMatrix)
+        print(distCoeffs)
 
 
 
