@@ -38,6 +38,14 @@ projImg = cv2.imread('image displays/circleGrid.png')
 
 counter = 0
 
+# 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
+
+keyb = input("Hit 'q'")
+if keyb == 'q':
+    cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
+    cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.imshow("image", projImg)
+    cv2.waitKey()
 
 for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
     counter +=1
@@ -100,14 +108,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     cv2.waitKey()
     #key = cv2.waitKey(1) & 0xFF
 
-    # 2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
 
-    keyb = input("Hit 'q'")
-    if keyb == 'q':
-        cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
-        cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-        cv2.imshow("image", projImg)
-        cv2.waitKey()
 
     #DETECT RED CIRCLES FROM THE PROJECTOR
       #some code here
