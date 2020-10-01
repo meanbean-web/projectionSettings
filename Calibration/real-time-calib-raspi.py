@@ -67,6 +67,15 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         # that the board was properly detected
         img = cv2.drawChessboardCorners(img, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc,
                                         board)
+    # preview checkerboard detection frame + vectorial orientation
+
+    cv2.imshow("Frame", img)
+    key = cv2.waitKey(1) & 0xFF
+
+    rawCapture.truncate(0)
+
+    if key == ord("q"):
+        break
 
     if counter < 40:
         print(counter)
@@ -95,7 +104,6 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #preview checkerboard detection frame + vectorial orientation
 
     cv2.imshow("Frame", img)
-    #cv2.waitKey()
     key = cv2.waitKey(1) & 0xFF
 
     rawCapture.truncate(0)
@@ -106,7 +114,9 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
 
     #DETECT RED CIRCLES FROM THE PROJECTOR
-      #some code here
+    circles_grid_size= (4,7)
+    ret, circles = cv2.findCirclesGrid(gray, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
+    img2 = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
 
 
     #COMPARE ORIGINAL INPUT IMAGE TO THE IMAGE RETRIEVED FROM THE PROJECTOR DETECTION
