@@ -67,10 +67,52 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         img = cv2.drawChessboardCorners(img, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT), corners_acc,
                                         board)
 
-    #preview checkerboard detection frame
+    # CALIBRATE CAMERA
+    # if the number of retrieved images is 40, then calibrate the camera > you might want to add the first 40 frames to a folder
+
+    if img == 40:
+        calibration, cameraMatrix, distCoeffs, rvecs, tvecs = cv2.calibrateCamera(
+            objectPoints=objpoints,
+            imagePoints=imgpoints,
+            imageSize=imageSize,
+            cameraMatrix=None,
+            distCoeffs=None)
+
+        # Print matrix and distortion coefficient to the console
+        print(cameraMatrix)
+        print(distCoeffs)
+
+
+
+
+
+
+    #GET CENTER AND VECTOR DIRECTION OF THE CHESSBOARD
+        #if you can get the surface of the chessboard overall
+        #you can get bounding edges
+
+
+    #preview checkerboard detection frame + vectorial orientation
 
     cv2.imshow("Frame", img)
     key = cv2.waitKey(1) & 0xFF
+
+
+    #DETECT RED CIRCLES FROM THE PROJECTOR
+      #some code here
+
+
+    #COMPARE ORIGINAL INPUT IMAGE TO THE IMAGE RETRIEVED FROM THE PROJECTOR DETECTION
+
+###PERSPECTIVE CORRECTION ###
+    #MATCH PERSPECTIVE TO CHECKERBOARD PERSPECTIVE
+         # draw bounding box around detected circles
+
+
+    #at this point you'll have two separate images, matching the projection perspective as you go.
+
+###OVERLAP CORRECTION ###
+
 
     rawCapture.truncate(0)
 
@@ -78,14 +120,13 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         break
 
 
-
-
-#2: LOAD IMAGE ON KEY INPUT
+#2: LOAD IMAGE ON KEY INPUT- figure out why ubuntu isn't taking input from keyboard
 
 key = input()
 if key == 'q':
     cv2.namedWindow('image', cv2.WND_PROP_FULLSCREEN)
     cv2.setWindowProperty('image', cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-    cv2.imshow("image", img)
+    cv2.imshow("image", projImg)
     cv2.waitKey()
+
 
