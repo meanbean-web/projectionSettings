@@ -1,10 +1,9 @@
 from picamera.array import PiRGBArray
 from picamera import PiCamera
-from pynput import keyboard
 import time
 import cv2
 import numpy
-import subprocess
+
 
 #comments for improvement: separate the main chunks of this code into separate definitions
 
@@ -69,6 +68,11 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
                                         board)
     # preview checkerboard detection frame + vectorial orientation
 
+    # DETECT RED CIRCLES FROM THE PROJECTOR
+    circles_grid_size = (4, 7)
+    ret, circles = cv2.findCirclesGrid(img, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
+    img = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
+
     cv2.imshow("Frame", img)
     key = cv2.waitKey(1) & 0xFF
 
@@ -103,18 +107,18 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
 
     #preview checkerboard detection frame + vectorial orientation
 
-    # DETECT RED CIRCLES FROM THE PROJECTOR
-    circles_grid_size = (4, 7)
-    ret, circles = cv2.findCirclesGrid(img, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
-    img = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
-
-    cv2.imshow("Frame", img)
-    key = cv2.waitKey(1) & 0xFF
-
-    rawCapture.truncate(0)
-
-    if key == ord("q"):
-        break
+    # # DETECT RED CIRCLES FROM THE PROJECTOR
+    # circles_grid_size = (4, 7)
+    # ret, circles = cv2.findCirclesGrid(img, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
+    # img = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
+    #
+    # cv2.imshow("Frame", img)
+    # key = cv2.waitKey(1) & 0xFF
+    # 
+    # rawCapture.truncate(0)
+    #
+    # if key == ord("q"):
+    #     break
 
 
 
