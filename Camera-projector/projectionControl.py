@@ -3,7 +3,7 @@ import cv2
 
 
 def projectCircles :
-    img= cv2.imread('image files/circleGrid.png') #project initial image
+    img= cv2.imread('temp/image files/circleGrid.png') #project initial image
 
 
 

@@ -99,20 +99,20 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         print(cameraMatrix)
         print(distCoeffs)
 
-    # DISPLAY CIRCLE GRID
-    if counter > 40:
-        while reprojectionError < 0.5:
-            #declare variables for backprojection
-            images=
-            channels=
-            hist=
-            ranges=
-
-            pattern = cv2.imread('image files/ circleGrid.png')
-            # show pattern full screen on the extended screen
-            cv2.calcBackProject()
-
-            # returns probability in image B
+    # # DISPLAY CIRCLE GRID
+    # if counter > 40:
+    #     while reprojectionError < 0.5:
+    #         #declare variables for backprojection
+    #         images=
+    #         channels=
+    #         hist=
+    #         ranges=
+    #
+    #         pattern = cv2.imread('image files/ circleGrid.png')
+    #         # show pattern full screen on the extended screen
+    #         cv2.calcBackProject()
+    #
+    #         # returns probability in image B
 
 
     #GET CENTER AND VECTOR DIRECTION OF THE CHESSBOARD
@@ -120,20 +120,20 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         #you can get bounding edges
 
 
-    #preview checkerboard detection frame + vectorial orientation
+    preview checkerboard detection frame + vectorial orientation
 
-    # # DETECT RED CIRCLES FROM THE PROJECTOR
-    # circles_grid_size = (4, 7)
-    # ret, circles = cv2.findCirclesGrid(img, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
-    # img = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
-    #
-    # cv2.imshow("Frame", img)
-    # key = cv2.waitKey(1) & 0xFF
-    #
-    # rawCapture.truncate(0)
-    #
-    # if key == ord("q"):
-    #     break
+    # DETECT RED CIRCLES FROM THE PROJECTOR
+    circles_grid_size = (4, 7)
+    ret, circles = cv2.findCirclesGrid(img, circles_grid_size, flags=cv2.CALIB_CB_SYMMETRIC_GRID)
+    img = cv2.drawChessboardCorners(img, circles_grid_size, circles, ret)
+
+    cv2.imshow("Frame", img)
+    key = cv2.waitKey(1) & 0xFF
+
+    rawCapture.truncate(0)
+
+    if key == ord("q"):
+        break
 
 
 

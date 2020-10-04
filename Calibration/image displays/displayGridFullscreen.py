@@ -2,7 +2,7 @@ import cv2
 
 ## we'll be using this file to communicate graphics to the projector
 
-projImg = cv2.imread('circleGrid.png')
+projImg = cv2.imread('whiteCircles.png')
 
 keyb = input("Hit 'q'")
 if keyb == 'q':
