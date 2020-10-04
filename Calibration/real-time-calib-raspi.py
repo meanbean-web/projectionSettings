@@ -99,6 +99,21 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         print(cameraMatrix)
         print(distCoeffs)
 
+    # DISPLAY CIRCLE GRID
+    if counter > 40:
+        while reprojectionError < 0.5:
+            #declare variables for backprojection
+            images=
+            channels=
+            hist=
+            ranges=
+
+            pattern = cv2.imread('image files/ circleGrid.png')
+            # show pattern full screen on the extended screen
+            cv2.calcBackProject()
+
+            # returns probability in image B
+
 
     #GET CENTER AND VECTOR DIRECTION OF THE CHESSBOARD
         #if you can get the surface of the chessboard overall
@@ -114,7 +129,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
     #
     # cv2.imshow("Frame", img)
     # key = cv2.waitKey(1) & 0xFF
-    # 
+    #
     # rawCapture.truncate(0)
     #
     # if key == ord("q"):
