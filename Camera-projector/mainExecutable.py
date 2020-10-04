@@ -1,5 +1,5 @@
-from cameraCalibration import calibration
-from projectionControl import projectCircles
+#from cameraCalibration import calibration
+#from projectionControl import projectCircles
 import cv2
 import time
 from picamera import PiCamera
@@ -43,7 +43,7 @@ while camera.capture_continuous:
 
         board, corners = cv2.findChessboardCorners(gray, (CHESSBOARD_CORNERS_ROWCOUNT, CHESSBOARD_CORNERS_COLCOUNT),
                                                    None)
-        if board == True:
+        if board:
             # Add the points in 3D that we just discovered
             objpoints.append(objp)
 
