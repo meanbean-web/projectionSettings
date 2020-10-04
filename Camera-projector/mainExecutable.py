@@ -3,6 +3,7 @@
 import cv2
 import time
 from picamera import PiCamera
+from picamera.array import PiRGBArray
 import numpy
 import yaml
 
