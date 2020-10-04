@@ -120,7 +120,7 @@ for frame in camera.capture_continuous(rawCapture, format="bgr", use_video_port=
         #you can get bounding edges
 
 
-    preview checkerboard detection frame + vectorial orientation
+   # preview checkerboard detection frame + vectorial orientation
 
     # DETECT RED CIRCLES FROM THE PROJECTOR
     circles_grid_size = (4, 7)
